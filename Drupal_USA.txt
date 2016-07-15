@@ -1,0 +1,88 @@
+*** Settings ***
+Force Tags        ITMCC    MetroPages
+Resource          ../Resources/MetroArea keywords.txt
+Resource          ../Resources/MetroArea locators.txt
+Library           Selenium2Library
+Library           DatabaseLibrary
+Library           String
+Library           OperatingSystem
+Library           Screenshot
+Library           pabot.PabotLib
+Library           ExcelLibrary
+
+*** Test Cases ***
+Metro_HomePage
+    [Documentation]    Testcase to Verify Metro Area pages layout
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    MetroPage_VerifyHomePage_USA
+    ${StartNumLines}    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from TXT    ${CITY}    MetroPages_HomePageObjectsVerification_Smoke_USA.txt
+    Verify Home Page Objects US    ${StartNumLines}    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+Metro_StaffingService
+    [Documentation]    Testcase to Verify Metro Areas staffing services layout and content
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    MetroPage_VerifyStaffingServices_USA
+    ${StartNumLines}    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from TXT    ${CITY}    MetroPages_StaffingServices_Smoke_USA.txt
+    Verify Staffing Service Page Objects US    ${StartNumLines}    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+Metro_Blog
+    [Documentation]    Testcase to Verify Metro Areas blog pages layout
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    MetroPage_VerifyBlogPages_USA
+    ${StartNumLines}    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from TXT    ${CITY}    MetroPages_BlogObjectsVerification_Smoke_USA.txt
+    Verify Blog Page Objects US    ${StartNumLines}    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+Customer_Feedback
+    [Documentation]    Testcase to Verify Customer Feedback page layout
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    MetroPage_Customer_Feedback_USA
+    ${StartNumLines}    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from TXT    ${CITY}    MetroPages_CustomerFeedbackVerification_Smoke_USA.txt
+    #Verify Customer Feedback Page Objects US    ${StartNumLines}    ${NumLines}    ${FileContents}
+    ${eMail}=    Fill in all required fields of Customer Feedback Form & Submit    ${StartNumLines}    ${NumLines}    ${FileContents}
+    #Verify User Receives Email Containing Copy of Submitted Feedback
+    Verify Candidate Confirmation Email    ${eMail}
+    [Teardown]    Teardown_test
+
+JobApply_Metro
+    [Documentation]    Testcase to Verify Job Apply Functionality
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    JOBApply_MetroPage
+    ${StartNumLines}    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from TXT    ${CITY}    MetroPages_ApplyForJob.txt
+    Metro Area Apply For Job    ${StartNumLines}    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+JobSearch_JobApply_LOB_NewCandidate
+    [Documentation]    Basic Job Search and Apply Functionality
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    LOB_JOB_Search_and_Apply
+    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from CSV    BasicJSwithKW.csv
+    LOB Job Search And Apply    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+JobSearch_JobApply_LOB_ExistingCandidate
+    [Documentation]    Basic Job Search and Apply by Existing Candidate
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    LOB_JOB_Search_and_Apply_ExistingCandidate
+    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from CSV    BasicJSwithKW_${ENV.upper()}.csv
+    LOB Job Search And Apply Existing Candidate    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+ResumeUpload_LOB_NewCandidate
+    [Documentation]    Upload Resume
+    [Tags]    smoke
+    [Setup]
+    ${filePass}    ${fileFail}=    Output Files SetUp    LOB_Upload_Resume
+    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from CSV    BasicJSwithKW.csv
+    LOB Upload Resume    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test
+
+JobSearch_JobApply_With_LinkedIn_LOB_NewCandidate
+    [Documentation]    Basic Job Search and Apply Functionality
+    [Tags]    smoke
+    ${filePass}    ${fileFail}=    Output Files SetUp    LOB_JOB_Search_and_Apply
+    ${NumLines}    ${FileContents}=    Fetch Page Objects to Verify from CSV    BasicJSwithKW.csv
+    LOB Job Search And Apply With LinkedIn    ${NumLines}    ${FileContents}
+    [Teardown]    Teardown_test

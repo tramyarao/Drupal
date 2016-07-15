@@ -1,0 +1,257 @@
+*** Settings ***
+Resource          MetroArea locators.txt
+
+*** Variables ***
+# DRUPAL METRO AREA HOME PAGE
+${Logo}           xpath=//a[@class="site-logo"]
+${Country_menu}    xpath=.//*[@id='block-menu-menu-country-selector']/ul/li/a
+${Country_menu_canada}    xpath=.//*[@id='block-menu-menu-iz-can-country-selector']/ul/li/a
+${Main_menu}      xpath=//ul[contains(@class,"tb-megamenu-nav nav level-0")]
+${Main_menu_canada}    xpath=//ul[contains(@class,"tb-megamenu-nav")]/li
+${Main_menu_IZ}    xpath=//ul[contains(@class,"tb-megamenu-nav")]/li
+${Bread_crumb}    xpath=//div[@class="easy-breadcrumb"]
+${Image_below_header}    xpath=//div[@class='field-content']//img
+${City_area_image_text}    xpath=//div[@class='metro-tagline']
+${Phone_number}    xpath=//div[@class="metro-contact"]
+${Country_selector}    xpath=//nav[@id="block-menu-menu-country-selector"]//ul[@class="menu"]
+${Country_selector_canada}    xpath=.//*[@id='block-menu-menu-iz-can-country-selector']//ul[@class="menu"]
+${Staffing_service_selector}    xpath=//div[@class="panel-pane pane-menu-tree pane-menu-metro-pages"]//ul[@class="menu"]
+${Left_column_main_content}    xpath=//div[@class="panel-panel panel-col"]
+${Map}            xpath=//div[@class="panel-pane pane-views pane-metro-office-list"]
+${Map_IZ}         xpath=//*[contains(@id,'OpenLayers') and contains(@id,'svgRoot')]
+${View_office_locations}    xpath=//div[@class="view-header"]
+${RH_map_flags}    xpath=//*[contains(@id,'Geometry') and contains(@id,'Point')]
+${Blog_&_map_heading}    xpath=//h2[@class="pane-title"]
+${Blog_filter_1}    xpath=.//*[@id='edit-field-line-of-business-tid-selective']
+${Blog_filter_2}    xpath=.//*[@id='edit-field-rh-blog-categories-tid-selective']
+${Blog_entry}     xpath=//div[@class="item-list"]//a
+${Blog_entry_date}    xpath=//div[@class="views-field views-field-created"]
+${Blog_entry_short_decription}    xpath=//div[@class="views-field views-field-body"]
+${See_All_button}    xpath=//div[@class="more-link"]//a
+${RH_most_admiered_co}    xpath=.//*[@id='block-views-accolades-view-block']/div/div/div
+${RH_most_admiered_co_canada}    xpath=.//*[@id='block-views-accolades-i18n-view-block']/div/div/div
+${RH_most_admiered_co_australia}    xpath=.//*[@id='block-views-accolades-i18n-view-block']/div/div/div
+${RH_most_admiered_co_IZ}    xpath=.//*[@id='block-views-accolades-i18n-view-block']/div/div/div
+${Footer}         xpath=//footer[@class="l-footer"]
+${Job_seekers_button}    xpath=//div[@id='block-tb-megamenu-menu-top-menu']/div/div/div/ul/li[1]/a[@class='dropdown-toggle']
+${Job_seekers_dropdown}    xpath=//a[@href='/job-seekers'and @class='dropdown-toggle']
+${Submit_your_CV_footer}    xpath=//nav[@id='block-menu-menu-footer-menu-column-1']/ul/li/ul/li[1]/a
+${Submit_your_CV_header}    xpath=//a[starts-with(@href,'https://rh.roberthalf.com/resumeupload/resumeupload.do')]
+${CityState}      xpath=//div[@id='iz_qs_job_search_location_chosen']/a/span
+${SearchJobs_button_IZ}    xpath=//input[@id='edit-rh-iz-job-search-qs-submit']
+${RH_Home_Logo}    xpath=//a[@title='Robert Half Home']
+# DRUPAL METRO AREA STAFFING PAGE
+${Marketing_blurb}    xpath=//div[@class="views-field views-field-field-metro-intro-body"]
+${Specialties}    xpath=//div[@class="views-field views-field-field-metro-intro-addtl"]
+${Employers_section}    xpath=.//*[@id='quicktabs-metro_lob_tabs']
+${Job_list}       xpath=.//*[@id='quicktabs-metro_lob_tabs']
+${FirstJobInListTitle}    xpath=//table[@class='job-search-results']/thead/tr[position()=1]/td[@class="JobTitle"]/span[@class='job-title']/a
+${Search_job_button}    xpath=//div[@class="job-search-portal-links"]/a
+${JobListDate}    xpath=//td[@class='PostDate hide-mobile']
+${JobListLocation}    xpath=//td[@class='City hide-mobile']
+${Job_short_description}    xpath=//td[@class='JobDescription']
+${All_project_jobs_button}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'All Project Jobs')]
+${All_temporary_jobs_button}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'All Temporary Jobs')]
+${All_full_time_jobs_button}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'All Full-Time Jobs')]
+${Overview}       xpath=//li[@class="first leaf active-trail active menu-mlid-15861 currentTab"]
+${Overview_IZ}    xpath=//a[contains(@href,'overview') and contains(@class,'active')]
+# DRUPAL METRO AREA BLOG PAGE
+${Previous_page_button}    xpath=//li[@class='pager__item pager__item--previous']/a
+${Next_page_button}    xpath=//li[@class='pager__item pager__item--next']/a
+${Pages}          xpath=//li[@class="pager__item"]
+${Posts_per_page}    xpath=//span[@class='posts-per-page']/preceding-sibling::select[@id='edit-items-per-page']
+${Back_to_main}    xpath=//div[@class="view-footer"]/p/a
+# DRUPAL METRO AREA JOB APPLY PAGE
+${View_office_child_lobs}    xpath=//div[@class="item-list"]
+${Employers}      xpath=//li[@class="leaf active menu-mlid-15856"]
+${Employers_IZ}    xpath=//a[contains(@href,'employers') and contains(@class,'active')]
+${Find_jobs}      xpath=//li[@class="last leaf active menu-mlid-15851"]
+${Find_jobs_IZ}    xpath=//a[contains(@href,'jobs') and contains(@class,'active')]
+${All_banking_jobs_button}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'All Banking Jobs')]
+${All_temporary_jobs_button_FR}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'Tous les emplois temporaires')]
+${All_project_jobs_button_FR}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'Tous les emplois par projet')]
+${All_banking_jobs_button_FR}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'Tous les emplois bancaires')]
+${All_full_time_jobs_button_FR}    xpath=//*[@id='mini-panel-metro_lob_jobs_mini']//a[contains(text(),'Tous les emplois permanents')]
+${Button_Apply_Now}    xpath=//span[@class="apply-button-top"]/button
+# DRUPAL METRO AREA RESUME UPLOAD PAGE
+#${Resume_file_locator}    xpath=.//*[@id='file']
+${Resume_file_locator}    id=edit-rh-resume-upload-resume
+#${First_name_locator}    xpath=.//*[@id='firstName']
+#${Last_name_locator}    xpath=.//*[@id='lastName']
+#${Email_locator}    xpath=.//*[@id='emailAddress']
+#${Phone_no_locator}    xpath=.//*[@id='phone']
+#${Primary_addr_locator}    xpath=.//*[@id='AddressLine1']
+#${Primary_city_locator}    xpath=.//*[@id='city']
+#${Primary_state_locator}    xpath=.//*[@id='stateCountry']
+#${Zip_code_locator}    xpath=.//*[@id='zip']
+${First_name_locator}    id=edit-rh-resume-upload-first
+${Last_name_locator}    id=edit-rh-resume-upload-last
+${Email_locator}    id=edit-rh-resume-upload-email-required
+${Phone_no_locator}    id=edit-rh-resume-upload-phone-required
+${Primary_addr_locator}    id=edit-rh-resume-upload-address
+${ADDRESS_LINE_2}    id=edit-rh-resume-upload-address-2
+${Primary_city_locator}    id=edit-rh-resume-upload-city
+${Primary_state_locator}    id=edit-rh-resume-upload-state
+${Zip_code_locator}    id=edit-rh-resume-upload-zip
+${UPLOAD_FILE_OPTION}    id=upload-link
+#${Termsofuse_locator}    xpath=.//*[@id='termsOfUseChecked']
+${Termsofuse_locator}    id=edit-rh-resume-upload-tou
+${No_results_found}    xpath=//p[text()='No results found.']
+${FirstJobInList}    xpath=//table[@class='job-search-results']/thead/tr[position()=1]/td[@class="JobTitle"]/span[@class='job-title']/a
+${ApplyNowButton}    xpath=//span[@class="apply-button-top"]/button[contains(text(),'Apply Now')]
+${ApplyWithLinkedInButton}    xpath=//span[@class="apply-button-top"]/button[contains(text(),'Apply with LinkedIn')]
+# DRUPAL METRO AREA LOB SEARCH JOBS PAGE
+${SearchJobs_button}    xpath=//input[@value="Search Jobs"]
+${MY_DESHBOARD_LINK}    //a[contains(text(),'My Dashboard')]
+# DRUPAL METRO AREA LOB CANDIDATE SIGN IN PAGE
+${LOB_UserName_field}    xpath=//input[contains(@id,'username')]
+${LOB_Password_field}    xpath=//input[contains(@id,'password')]
+${LOB_SignIn_button}    xpath=//input[@value='Sign in']
+${TIME_APPROVAL_BUTTON}    xpath=//input[(@value='Time Approval')]
+# DRUPAL METRO AREA LOB JOB SEARCH PAGE
+${Submit_Your_Resume_button}    xpath=//a[@title="Submit Your Resume"]
+${FirstName_locator}    id=firstName
+${LastName_locator}    id=lastName
+${Login_Register_locator}    xpath=//*[@id='SignIn']
+#${JobTitle_to_Apply}    xpath=//table[@class="job-search-results"]/tbody/tr[position()=1]/td[@class="JobTitle"]/a
+${JobTitle_to_Apply}    xpath=//table[@class="job-search-results"]/tbody/tr[@class='job-search-page']/td[@class="JobTitle"]
+${Job_Seekers_Page}    xpath=//div[@class='views-field views-field-field-metro-find-jobs-title']
+${Employers_Page}    xpath=//div[@class='views-field views-field-field-employers-intro-title']
+${Overview_Page}    xpath=//div[@class='views-field views-field-field-metro-intro-title']
+${Click_Hide_Office_Locations}    xpath=//h3[@class='ol-header click-processed open']
+${Click_View_Office_Locations}    xpath=//h3[@class='ol-header click-processed closed']
+#### ---->        Below variables are for all IZ countries Job Search and Apply
+# DRUPAL IZ JOB SEARCH RESULTS PAGE
+${SearchJobs_button_results_page}    xpath=//input[@id='edit-rh-iz-job-search-submit']
+${Subscribe}      xpath=//a[@class='rss-link']
+${Keyword_input}    xpath=//input[@id='edit-rh-iz-job-search-qs-keywords']
+${JobSearch_Keywords}    xpath=//input[@id='job-search-keywords']
+${JobSearch_Location}    xpath=//div[@id='job_search_location_chosen']/ul/li/input[@type='text']
+${Order_By}       xpath=//select[@id='sortColumn']
+${Title_Field_Asc}    xpath=//select[@id='sortColumn']/option[@value='title_field-ASC']
+${Salary_Field_Desc}    xpath=//select[@id='sortColumn']/option[@value='field_job_salary_from-DESC']
+${Location_Field_Asc}    xpath=//select[@id='sortColumn']/option[@value='field_job_city_id:name-ASC']
+${Date_Field_Desc}    xpath=//select[@id='sortColumn']/option[@value='field_job_date_added-DESC']
+${Loc_Search_Choice_Close}    xpath=//a[@class='search-choice-close']
+${Job_Classification}    xpath=//div[@class='lobcode']/ul/li[1]
+${Job_Classification_all}    xpath=//div[@class='lobcode']/ul/li[@class='show-all']
+${Job_Types}      xpath=//div[@class='jobtypes']/ul/li[1]
+${Job_Types_all}    xpath=//div[@class='jobtypes']/ul/li[@class='show-all']
+${Locations}      xpath=//div[@class='cities']/ul/li[1]
+${Locations_all}    xpath=//div[@class='cities']/ul/li[@class='show-all']
+${EmpTypes}       xpath=//div[@class='emptypes']/ul/li[1]
+${EmpTypes_all}    xpath=//div[@class='emptypes']/ul/li[@class='show-all']
+${PostedWthn}     xpath=//div[@class='daysold']/ul/li[1]
+${PostedWthn_all}    xpath=//div[@class='daysold']/ul/li[@class='show-all']
+${Similar_Jobs}    xpath=//div[@class='job-search-sidebar']/h3
+${SimJobs_First_Page}    xpath=//ul[@class='job-search-pager']/li[@data-pg='first']
+${SimJobs_Prev_Page}    xpath=//ul[@class='job-search-pager']/li[@data-pg='prev']
+${SimJobs_Next_Page}    xpath=//ul[@class='job-search-pager']/li[@data-pg='next']
+${SimJobs_Last_Page}    xpath=//ul[@class='job-search-pager']/li[@data-pg='last']
+# DRUPAL IZ JOB SEARCH SUBMIT YOUR CV PAGE (JOB APPLY)
+${First_name}     xpath=//input[@id='firstName']
+${First_name2}    xpath=//input[@id='edit-rh-resume-upload-first']
+${Last_name}      xpath=//input[@id='lastName']
+${Last_name2}     xpath=//input[@id='edit-rh-resume-upload-last']
+${Email_Address}    xpath=//input[@id='emailAddress']
+${Email_Address2}    xpath=//input[@id='edit-rh-resume-upload-email-required']
+${Comments_loc}    xpath=//div[@class='profile_info_section']/div/div[2]/textarea[@id='comments']
+${Comments_loc2}    xpath=//textarea[@id='edit-rh-resume-upload-comments']
+${Phone_No}       xpath=//input[@id='phone']
+${Phone_No2}      xpath=//input[@id='edit-rh-resume-upload-phone-required']
+${Comments}       *** TESTING ONLY ***
+${Available_from}    xpath=//select[@id='availableFrom']
+${Available_from2}    xpath=//select[@id='edit-rh-resume-upload-available-from']
+${Available_from_option}    xpath=//select[@id='availableFrom']/option[4]
+${Available_from_option2}    xpath=//select[@id='edit-rh-resume-upload-available-from']/option[4]
+# DRUPAL IZ SUBMIT CV PAGE (RESUME UPLOAD)
+${Specialisation_list}    xpath=//select[@id='specialization_list']
+${Specialisation_list_option}    xpath=//select[@id='specialization_list']/option[2]
+${Jobtype_list}    xpath=//select[@id='jobType_list']
+${Jobtype_list_option}    xpath=//select[@id='jobType_list']/option[2]
+${Office_list}    xpath=//select[@id='office_list']
+${Office_list_option}    xpath=//select[@id='office_list']/option[2]{Resume_Submit_button}
+${Resume_Submit_Button}    xpath=//input[@id='submit_btn']
+${DropBox_Recent_Files}    xpath=//div[@id='recents-header']
+# DRUPAL IZ JOB SEARCH SUBMIT YOUR CV PAGE & SUBMIT CV PAGE
+${Upload_your_CV}    xpath=//div[@class='resume_upload_section']/div[@id='upload_section_title']
+${Upload_your_CV2}    xpath=//a[@id='upload-link']
+${Choose_File}    xpath=//div[@class='resume_upload_section']/div/div[2]/input[@id='file']
+${Personal_data_check}    xpath=//input[@id='edit-rh-resume-upload-personal-data']
+${Page_Header}    xpath=//ul[contains(@class,"tb-megamenu-nav nav level-0")]
+${Robert_Half_Home}    xpath=//a[@title='Robert Half Home']
+${Send_CV_Link}    xpath=//div[@id='upload_section_link_title']
+${Send_CV_Link2}    xpath=//a[@id='resume-link']
+${Resume_URL}     xpath=//input[@id='direct_resume_url']
+${Resume_URL2}    xpath=//input[@id='edit-rh-resume-upload-link']
+${Choose_File}    xpath=//div[@class='resume_upload_section']/div/div[2]/input[@id='file']
+${Termsofuse_locator2}    xpath=//input[@id='edit-rh-resume-upload-tou']    # for BR and SG
+${Open_Terms_Window}    xpath=//a[@href='javascript:openTermsWindow()']
+${Open_Terms_Window2}    xpath=//a[@href='/website-terms-use']
+${Open_Terms_Window3}    xpath=//a[@href='/legal-info/termos-de-uso']
+${Personal_Data_Link}    xpath=//a[@href='javascript:openPersonalDataWindow()']
+# DRUPAL IZ JOB TITLE DESCRIPTION PAGE
+${Email_To_Friend_Conf}    xpath=//div[@class='thank-you']
+${Email_Conf_Close}    xpath=//button[@title='Close']
+${Email_To_Friend}    xpath=//a[@class='email']
+${Apply_Now_Button}    xpath=//span[@class="apply-button-top"]/button
+${Submit_Confirm_Message}    xpath=//div[@class='messages messages--status']
+${Submit_Error_Message}    xpath=//div[@class='messages messages--error']
+${Submit_CV_Upload_Confirm_Msg}    xpath=//p[@id='resumeOnlyConfMessage']
+# CUSTOMER FEEDBACK PAGE
+${Feedback_Type}    xpath=//select[@id='edit-rh-customer-feedback-type']
+${Office_You_Work_With}    xpath=//input[@id='edit-rh-customer-feedback-office-optional']
+${Brief_Description}    xpath=//textarea[@id='edit-rh-customer-feedback-description']
+${Your_First_Name}    xpath=//input[@id='edit-rh-customer-feedback-first']
+${Your_Last_Name}    xpath=//input[@id='edit-rh-customer-feedback-last']
+${Your_Email_Address}    xpath=.//*[@id='edit-rh-customer-feedback-email-required']
+${Your_Phone_Number}    xpath=//input[@id='edit-rh-customer-feedback-phone-optional']
+${Submit_Button_Feedback}    xpath=//input[@id='edit-rh-customer-feedback-submit']
+${About_Us}       xpath=(//a[contains (text(),'About Us')])[1]
+${Customer_Feedback_Form_link}    xpath=//a[contains (text(),'Customer Feedback Form')]
+${Customer_Feedback_Main_Content_Form}    xpath=//div/a[@id="main-content"]
+##                DRUPAL CREATIVE GROUP PAGE
+${My_Dashboard}    xpath=//a[contains(text(),'My Dashboard')]
+##                DRUPAL MY DASHBOARD | CREATIVE GROUP PAGE
+${TCG_Canvas_Outer_Frame}    xpath=//iframe[contains(@id,'canvas-outer-_:')]
+${TCG_Canvas_Inner_Frame}    xpath=//iframe[contains(@id,'canvas-inner-_:')]
+${TCG_Manage_Portfolio}    xpath=//form[@id='manage']/a
+##                DRUPAL CREATIVE GROUP | DIGITAL PORTFOLIO PAGES
+${TCG_Create_Btn}    xpath=//img[contains(@src,'create.png')]
+${TCG_Project_Name}    xpath=//input[@id='proj_name']
+${TCG_Images}     xpath=//img[contains(@src,'images') and contains(@src,'icons')]
+${TCG_Arrange}    xpath=//div[@id='arrange_content']/h1
+${TCG_Creative_Fields}    xpath=//select[@id='create_field_list']
+#${TCG_Select_Files}    xpath=//input[contains(@type,'file') and contains(@style,'opacity')]
+${TCG_Select_Files}    xpath=.//*[@id='uploadifive-file_uploadifive']/input[2]
+${TCG_Select_File_Btn}    xpath=.//*[@id='uploadifive-file_uploadifive']
+${TCG_Drop_Files_Here}    xpath=.//*[@id='queue']
+${TCG_Start_Upload}    xpath=//img[contains(@src,'start') and contains(@src,'upload')]
+${TCG_Thumbnail_Image}    xpath=//img[contains(@src,'images') and contains(@src,'project')]
+${TCG_ProjectInfo_Form}    xpath=//form[@id='projectinfoform']
+${TCG_Creative_Fields}    xpath=//form[@id='projectinfoform']/table/tbody/tr[1]
+${TCG_Type_of_Work}    xpath=//form[@id='projectinfoform']/table/tbody/tr[3]
+${TCG_Industry}    xpath=//form[@id='projectinfoform']/table/tbody/tr[5]
+${TCG_Project_Role}    xpath=//form[@id='projectinfoform']/table/tbody/tr[6]
+${TCG_Project_Desc}    xpath=//form[@id='projectinfoform']/table/tbody/tr[7]
+${TCG_Search_Tags}    xpath=//form[@id='projectinfoform']/table/tbody/tr[8]
+${TCG_Positive_Outcomes}    xpath=//form[@id='projectinfoform']/table/tbody/tr[9]
+${TCG_Save_and_Continue}    xpath=//img[contains(@src,'savecontinue.png')]
+${TCG_Preview}    xpath=//img[contains(@src,'buttons') and contains(@src,'preview')]
+${TCG_Save}       xpath=//img[contains(@src,'save.png')]
+${TCG_Save_Confirm}    xpath=//img[contains(@src,'save.png')]
+${TCG_Return_to_DP_Home}    xpath=//span[@id='cdreturn']/a
+${TCG_Delete_Project}    xpath=.//*[@id='panelback']/a[3]/img
+${TCG_Signout}    xpath=//a[@class='ehf_logout']
+##                MAILINATOR EMAIL CONFIRMATION
+${Mailinator_InputInbox}    xpath=//input[@id='inboxfield']
+${Mailinator_GoButton}    xpath=//button[@type='button' and contains(@onclick,'changeInbox')]
+${Mailinator_PublicInbox}    //input[@id='publicinboxfield']
+${Mailinator_Email}    xpath=//div[@class='innermail ng-binding' and contains(@style,'height')]
+${Mailinator_EmailIFrame}    xpath=//iframe[@id='publicshowmaildivcontent']
+${Mailinator_EmailContent}    xpath=(//tbody/tr)[2]
+##                LinkedIn Pre-Login page
+${Apply_withLinkedIN_button}    xpath=//span[@class="apply-button-top"]/button[contains(text(),'Apply with LinkedIn')]
+${LinkedIn_UserName_field}    xpath=//input[@id='session_key-oauth2SAuthorizeForm']
+${LinkedIn_Password_field}    xpath=//input[@id='session_password-oauth2SAuthorizeForm']
+${LinkedIn_AllowAccess_button}    xpath=//input[@value="Allow access"]
